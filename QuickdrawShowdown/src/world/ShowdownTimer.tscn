@@ -3,6 +3,7 @@
 [ext_resource path="res://src/world/ShowdownTimer.gd" type="Script" id=1]
 
 [node name="ShowdownTimer" type="Timer"]
+one_shot = true
 script = ExtResource( 1 )
 
 [connection signal="timeout" from="." to="." method="_on_ShowdownTimer_timeout"]
