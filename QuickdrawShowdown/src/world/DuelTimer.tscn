@@ -1,5 +1,0 @@
-[gd_scene format=2]
-
-[node name="DuelTimer" type="Timer"]
-wait_time = 3.0
-one_shot = true

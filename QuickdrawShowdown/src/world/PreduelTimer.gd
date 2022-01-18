@@ -9,8 +9,8 @@ func _ready():
 	rng.randomize()
 	var quickdrawStart = rng.randf_range(timeRangeLow, timeRangeHi)
 	self.wait_time = quickdrawStart
+	print("PreDuelTimer started...")
 	self.start()
 
-
-func _on_ShowdownTimer_timeout():
-	get_node("DuelTimer").start()
+func _on_PreDuelTimer_timeout():
+	print("PreDuelTimer ended...")
