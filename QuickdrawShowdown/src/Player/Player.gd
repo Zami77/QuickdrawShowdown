@@ -12,7 +12,7 @@ var is_playerDrawn: bool = false
 
 const PLAYER_VICTORY_MSG = "Player Wins!"
 const ENEMY_VICTORY_MSG = "Enemy Wins!"
-const PLAYER_MISS_MSG = "Player never drew!"
+const PLAYER_MISS_MSG = "Player never drew or drew early!"
 const PLAYER_DRAW_TIME_MSG = "Player Draw Time:%s"
 
 onready var preDuelTimer: Timer = $QuickdrawTimers/PreDuelTimer
@@ -44,7 +44,8 @@ func find_winner() -> void:
 
 func _process(delta):
 	if is_duelOver or is_playerDrawn:
-		pass
+		return
+		
 	if is_preduel:
 		if Input.is_action_just_pressed("draw"):
 			is_playerDrawn = true
