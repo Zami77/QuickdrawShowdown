@@ -1,8 +1,41 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://assets/template_background.jpg" type="Texture" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Enemies/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Duels/Announcements.gd" type="Script" id=4]
 
-[node name="Node2D" type="Node2D"]
+[node name="DuelTemplate" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 210, 422 )
+
+[node name="Enemy" parent="Player" instance=ExtResource( 3 )]
+position = Vector2( 454, -127 )
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Announcements" type="Label" parent="."]
+margin_left = 445.0
+margin_top = 373.0
+margin_right = 519.0
+margin_bottom = 387.0
+text = "Standby......"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="end_duel" from="Player" to="Announcements" method="_on_Player_end_duel"]
+[connection signal="start_duel" from="Player" to="Announcements" method="_on_Player_start_duel"]
