@@ -9,6 +9,7 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 210, 422 )
+enemyDrawTime = 0.5
 
 [node name="Enemy" parent="Player" instance=ExtResource( 3 )]
 position = Vector2( 454, -127 )
