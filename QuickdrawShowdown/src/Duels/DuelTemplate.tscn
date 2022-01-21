@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/template_background.jpg" type="Texture" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Enemies/Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Duels/Announcements.gd" type="Script" id=4]
+[ext_resource path="res://src/UserInterface/StartDuelButton.tscn" type="PackedScene" id=5]
 
 [node name="DuelTemplate" type="Node2D"]
 
@@ -32,11 +33,24 @@ margin_left = 445.0
 margin_top = 373.0
 margin_right = 519.0
 margin_bottom = 387.0
-text = "Standby......"
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="StartDuelButton" parent="." instance=ExtResource( 5 )]
+margin_left = 439.0
+margin_top = 248.0
+margin_right = 518.0
+margin_bottom = 268.0
+
 [connection signal="end_duel" from="Player" to="Announcements" method="_on_Player_end_duel"]
-[connection signal="start_duel" from="Player" to="Announcements" method="_on_Player_start_duel"]
+[connection signal="end_duel" from="Player" to="StartDuelButton" method="_on_Player_end_duel"]
+[connection signal="end_round" from="Player" to="Announcements" method="_on_Player_end_round"]
+[connection signal="start_round" from="Player" to="Announcements" method="_on_Player_start_round"]
+[connection signal="next_duel" from="Announcements" to="StartDuelButton" method="_on_Announcements_next_duel"]
+[connection signal="start_duel" from="StartDuelButton" to="Player/QuickdrawTimers/PreDuelTimer" method="_on_StartDuelButton_start_duel"]
+[connection signal="start_duel" from="StartDuelButton" to="Announcements" method="_on_StartDuelButton_start_duel"]
+
+[editable path="Player"]
+[editable path="Player/QuickdrawTimers"]
