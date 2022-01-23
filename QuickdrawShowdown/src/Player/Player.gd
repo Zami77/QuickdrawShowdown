@@ -22,7 +22,7 @@ const PLAYER_MISS_MSG = "Player never drew or drew early!"
 const PLAYER_DRAW_TIME_MSG = "Player Draw Time:%s"
 const DUEL_STATS = "Player Wins:%s Enemy Wins:%s"
 
-const ROUNDS_TO_WIN: int = 1
+const ROUNDS_TO_WIN: int = 3
 
 onready var preDuelTimer: Timer = $QuickdrawTimers/PreDuelTimer
 onready var duelTimer: Timer = $QuickdrawTimers/DuelTimer
@@ -31,7 +31,11 @@ func _ready():
 	preDuelTimer.connect("timeout", self, "start_round")
 	duelTimer.connect("round_ended", self, "end_round")
 
-func startup_duel() -> void:
+func reset_duel() -> void:
+	playerDrawTime = INF
+	is_preduel = true
+	is_duelOver = false
+	is_playerDrawn = false
 	player_wins = 0
 	enemy_wins = 0
 	
@@ -42,6 +46,13 @@ func start_round() -> void:
 func end_round() -> void:
 	is_duelOver = true
 	find_round_winner()
+	reset_round()
+
+func reset_round() -> void:
+	is_duelOver = false
+	is_playerDrawn = false
+	is_preduel = true
+	playerDrawTime = INF
 
 func find_round_winner() -> void:
 	var win_message: String = ""
@@ -59,6 +70,7 @@ func find_round_winner() -> void:
 	if player_wins >= ROUNDS_TO_WIN or enemy_wins >= ROUNDS_TO_WIN:
 		win_message = PLAYER_DUEL_VICTORY_MSG if player_wins >= ROUNDS_TO_WIN else ENEMY_DUEL_VICTORY_MSG
 		win_message += "\n" + DUEL_STATS % [player_wins, enemy_wins]
+		reset_duel()
 		emit_signal("end_duel", win_message)
 		return
 	emit_signal("end_round", win_message)

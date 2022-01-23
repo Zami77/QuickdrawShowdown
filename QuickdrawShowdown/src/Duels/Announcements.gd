@@ -2,6 +2,9 @@ extends Label
 
 signal next_duel
 
+export var roundEndTime: int = 3
+export var nextRoundTime: int = 2
+
 func _on_Player_start_round():
 	self.text = "Draw!"
 
@@ -10,15 +13,16 @@ func _on_Player_end_round(win_message: String):
 	self.text = win_message
 	
 	var t = Timer.new()
-	t.set_wait_time(3)
+	t.set_wait_time(roundEndTime)
 	t.set_one_shot(true)
+	self.get_child_count()
 	self.add_child(t)
 	t.start()
 	yield(t, "timeout")
 	
 	self.text = "Next round coming!"
 	
-	t.set_wait_time(2)
+	t.set_wait_time(nextRoundTime)
 	t.set_one_shot(true)
 	self.add_child(t)
 	t.start()
