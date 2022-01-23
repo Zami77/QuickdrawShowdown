@@ -28,9 +28,14 @@ onready var preDuelTimer: Timer = $QuickdrawTimers/PreDuelTimer
 onready var duelTimer: Timer = $QuickdrawTimers/DuelTimer
 
 func _ready():
+	preDuelTimer.connect("preDuelTimerStart", self, "start_preduel")
 	preDuelTimer.connect("timeout", self, "start_round")
 	duelTimer.connect("round_ended", self, "end_round")
 
+func start_preduel() -> void:
+	is_playerDrawn = false
+	playerDrawTime = INF
+	
 func reset_duel() -> void:
 	playerDrawTime = INF
 	is_preduel = true
