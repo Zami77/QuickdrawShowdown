@@ -47,6 +47,8 @@ func _ready():
 
 func start_preduel() -> void:
 	is_playerDrawn = false
+	is_playerBlocked = false
+	is_playerBoosted = false
 	playerDrawTime = INF
 	
 func reset_duel() -> void:
