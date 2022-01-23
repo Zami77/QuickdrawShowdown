@@ -124,7 +124,7 @@ func find_round_winner() -> void:
 # -----------------------------------------------------------------------------
 
 func is_draw_illegal() -> bool:
-	return is_duelOver and is_playerDrawn and is_playerBlocked and is_playerBoosted
+	return is_duelOver or is_playerDrawn or is_playerBlocked or is_playerBoosted
 
 func is_boosted_draw() -> bool:
 	return Input.is_action_pressed("boost") and Input.is_action_just_pressed("draw") and not cur_player_boosts >= maxPlayerBoosts
