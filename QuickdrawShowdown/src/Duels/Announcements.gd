@@ -15,7 +15,6 @@ func _on_Player_end_round(win_message: String):
 	var t = Timer.new()
 	t.set_wait_time(roundEndTime)
 	t.set_one_shot(true)
-	self.get_child_count()
 	self.add_child(t)
 	t.start()
 	yield(t, "timeout")
@@ -24,7 +23,6 @@ func _on_Player_end_round(win_message: String):
 	
 	t.set_wait_time(nextRoundTime)
 	t.set_one_shot(true)
-	self.add_child(t)
 	t.start()
 	yield(t, "timeout")
 	
