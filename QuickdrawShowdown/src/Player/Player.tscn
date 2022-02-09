@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/world/QuickdrawTimers.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/showdown-samurai-test.png" type="Texture" id=3]
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 enemyDrawTime = 1.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_right = 120.0
 margin_bottom = 120.0
 __meta__ = {
@@ -15,3 +17,7 @@ __meta__ = {
 }
 
 [node name="QuickdrawTimers" parent="." instance=ExtResource( 2 )]
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
