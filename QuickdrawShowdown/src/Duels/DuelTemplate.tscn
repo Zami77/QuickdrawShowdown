@@ -49,6 +49,7 @@ margin_bottom = 268.0
 [connection signal="end_round" from="Player" to="Announcements" method="_on_Player_end_round"]
 [connection signal="start_round" from="Player" to="Announcements" method="_on_Player_start_round"]
 [connection signal="next_duel" from="Announcements" to="StartDuelButton" method="_on_Announcements_next_duel"]
+[connection signal="fresh_duel" from="StartDuelButton" to="Player" method="_on_StartDuelButton_fresh_duel"]
 [connection signal="start_duel" from="StartDuelButton" to="Player/QuickdrawTimers/PreDuelTimer" method="_on_StartDuelButton_start_duel"]
 [connection signal="start_duel" from="StartDuelButton" to="Announcements" method="_on_StartDuelButton_start_duel"]
 

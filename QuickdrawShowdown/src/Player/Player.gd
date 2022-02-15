@@ -10,7 +10,7 @@ export var maxPlayerBlocks: int = 1
 
 var playerDrawTime: float = INF
 var is_preduel: bool = true
-var is_duelOver: bool = false
+var is_duelOver: bool = true
 var is_playerDrawn: bool = false
 var is_playerBoosted: bool = false
 var is_playerBlocked: bool = false
@@ -50,11 +50,12 @@ func start_preduel() -> void:
 	is_playerBlocked = false
 	is_playerBoosted = false
 	playerDrawTime = INF
+	is_duelOver = false
 	
 func reset_duel() -> void:
 	playerDrawTime = INF
 	is_preduel = true
-	is_duelOver = false
+	is_duelOver = true
 	is_playerDrawn = false
 	is_playerBoosted = false
 	is_playerBlocked = false
@@ -73,7 +74,7 @@ func end_round() -> void:
 	reset_round()
 
 func reset_round() -> void:
-	is_duelOver = false
+	is_duelOver = true
 	is_playerDrawn = false
 	is_preduel = true
 	is_playerBlocked = false
@@ -173,4 +174,3 @@ func _process(_delta):
 	else:
 		# in duel
 		handle_duel_input()
-
