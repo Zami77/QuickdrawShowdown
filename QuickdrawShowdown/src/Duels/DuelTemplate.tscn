@@ -9,14 +9,17 @@
 [node name="DuelTemplate" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 680, 304 )
+position = Vector2( 679, 374 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 210, 422 )
+position = Vector2( 321, 379 )
 enemyDrawTime = 0.5
 
-[node name="Sprite" parent="Player" index="2"]
-position = Vector2( 111, -18 )
+[node name="Sprite" parent="Player" index="0"]
+position = Vector2( 2, 3 )
+
+[node name="QuickdrawTimers" parent="Player" index="1"]
+position = Vector2( 1, 2 )
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -100

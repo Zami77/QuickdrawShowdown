@@ -8,16 +8,8 @@
 script = ExtResource( 1 )
 enemyDrawTime = 1.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-margin_right = 120.0
-margin_bottom = 120.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="QuickdrawTimers" parent="." instance=ExtResource( 2 )]
-
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
+
+[node name="QuickdrawTimers" parent="." instance=ExtResource( 2 )]
