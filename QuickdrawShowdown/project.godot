@@ -12,7 +12,12 @@ config_version=4
 
 config/name="Quickdraw Showdown"
 run/main_scene="res://src/Screens/MainMenu.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/showdown-samurai-test.png"
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [input]
 
