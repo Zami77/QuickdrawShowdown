@@ -10,6 +10,6 @@ func _on_Announcements_next_duel():
 	emit_signal("start_duel")
 
 
-func _on_Player_end_duel(win_message: String):
+func _on_Player_end_duel(_win_message: String):
 	self.text = "Duel Again!"
 	show()
