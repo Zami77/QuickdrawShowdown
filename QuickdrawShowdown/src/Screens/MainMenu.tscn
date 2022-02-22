@@ -50,3 +50,17 @@ margin_left = -41.0
 margin_top = 22.0
 margin_right = 41.0
 margin_bottom = 42.0
+
+[node name="Label" type="Label" parent="Background"]
+margin_left = 277.0
+margin_top = 390.0
+margin_right = 759.0
+margin_bottom = 441.0
+text = "Press 'Z' to draw your sword when the announcement says draw, and hold down SHIFT for a once per round boost. Press 'X' to block once per round. Draw too early or late will result in a loss. 
+Fight bravely for the blue samurai!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
