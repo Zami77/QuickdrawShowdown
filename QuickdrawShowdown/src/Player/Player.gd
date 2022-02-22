@@ -3,6 +3,7 @@ extends Node2D
 signal start_round
 signal end_round
 signal end_duel
+signal enemy_sprite_update(enemy_sprite)
 
 export var enemyDrawTime: float = 0.5
 export var maxPlayerBoosts: int = 1
@@ -35,6 +36,10 @@ const BOOST_TIME: float = 0.05
 
 onready var preDuelTimer: Timer = $QuickdrawTimers/PreDuelTimer
 onready var duelTimer: Timer = $QuickdrawTimers/DuelTimer
+onready var playerSprite: Sprite = $Sprite
+onready var playerIdleTexture: Texture = load("res://assets/showdown-samurai-test.png")
+onready var playerDrawnTexture: Texture = load("res://assets/showdown-samurai-test-sword-up.png")
+onready var playerKOTexture: Texture = load("res://assets/showdown-samurai-test-KO.png")
 
 func _ready():
 	preDuelTimer.connect("preDuelTimerStart", self, "start_preduel")
@@ -51,6 +56,8 @@ func start_preduel() -> void:
 	is_playerBoosted = false
 	playerDrawTime = INF
 	is_duelOver = false
+	playerSprite.texture = playerIdleTexture
+	emit_signal("enemy_sprite_update", "idle")
 	
 func reset_duel() -> void:
 	playerDrawTime = INF
@@ -66,6 +73,8 @@ func reset_duel() -> void:
 	
 func start_round() -> void:
 	is_preduel = false
+	playerSprite.texture = playerIdleTexture
+	emit_signal("enemy_sprite_update", "idle")
 	emit_signal("start_round")
 
 func end_round() -> void:
@@ -87,11 +96,17 @@ func handle_round_win() -> String:
 	if playerDrawTime < enemyDrawTime:
 		player_wins += 1
 		win_message = PLAYER_VICTORY_MSG
+		playerSprite.texture = playerDrawnTexture
+		emit_signal("enemy_sprite_update", "ko")
 	elif playerDrawTime == enemyDrawTime:
 		win_message = PLAYER_STALEMATE_MSG
+		playerSprite.texture = playerDrawnTexture
+		emit_signal("enemy_sprite_update", "sword")
 	else:
 		enemy_wins += 1
 		win_message = ENEMY_VICTORY_MSG
+		playerSprite.texture = playerKOTexture
+		emit_signal("enemy_sprite_update", "sword")
 		
 	if playerDrawTime == INF:
 		win_message += "\n" + PLAYER_MISS_MSG
@@ -104,13 +119,21 @@ func is_final_match() -> bool:
 	return player_wins >= ROUNDS_TO_WIN or enemy_wins >= ROUNDS_TO_WIN
 
 func handle_final_match() -> void:
-	var win_message = PLAYER_DUEL_VICTORY_MSG if player_wins >= ROUNDS_TO_WIN else ENEMY_DUEL_VICTORY_MSG
+	var win_message = ""
+	if player_wins >= ROUNDS_TO_WIN:
+		win_message = PLAYER_DUEL_VICTORY_MSG
+	else:
+		win_message = ENEMY_DUEL_VICTORY_MSG
+		playerSprite.texture = playerKOTexture
+		emit_signal("enemy_sprite_update", "sword")
 	win_message += "\n" + DUEL_STATS % [player_wins, enemy_wins]
 	reset_duel()
 	emit_signal("end_duel", win_message)
 	
 func find_round_winner() -> void:
 	if is_playerBlocked:
+		playerSprite.texture = playerDrawnTexture
+		emit_signal("enemy_sprite_update", "sword")
 		emit_signal("end_round", PLAYER_BLOCK_MSG)
 		return
 	
